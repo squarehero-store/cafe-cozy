@@ -1,28 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Function to get the latest versioned CSS file
-function getLatestVersionedCSSFile(directory) {
-  const files = fs.readdirSync(directory);
-  const cssFiles = files.filter(file => file.startsWith('customcss-') && file.endsWith('.css'));
-
-  if (cssFiles.length === 0) {
-    throw new Error('No versioned CSS files found.');
-  }
-
-  // Sort files by version number or timestamp
-  cssFiles.sort((a, b) => {
-    const versionA = a.match(/customcss-(\d+).css/)[1];
-    const versionB = b.match(/customcss-(\d+).css/)[1];
-    return versionB - versionA;
-  });
-
-  return cssFiles[0];
-}
-
-const directoryPath = path.join(__dirname);
-const latestCSSFile = getLatestVersionedCSSFile(directoryPath);
-const filePath = path.join(directoryPath, latestCSSFile);
+// Path to your CSS file
+const filePath = path.join(__dirname, 'customcss.css');
 
 fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
@@ -41,6 +21,6 @@ fs.readFile(filePath, 'utf8', (err, data) => {
       console.error(err);
       return;
     }
-    console.log(`CSS variables have been replaced successfully in ${latestCSSFile}!`);
+    console.log(`CSS variables have been replaced successfully in customcss.css!`);
   });
 });
