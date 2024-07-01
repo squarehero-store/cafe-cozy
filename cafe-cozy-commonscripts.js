@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentYearElement = document.querySelector(".current-year");
   if (currentYearElement) {
     currentYearElement.textContent = new Date().getFullYear();
-    console.log('Current year set');
+    console.log('Current year set to:', currentYearElement.textContent);
   } else {
     console.log('Element with class .current-year not found');
   }
@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const siteTitleElement = document.querySelector(".site-title");
       if (siteTitleElement) {
         siteTitleElement.textContent = siteTitle;
-        console.log('Site title set:', siteTitle);
+        console.log('Site title set to:', siteTitle);
       } else {
         console.log('Element with class .site-title not found');
       }
