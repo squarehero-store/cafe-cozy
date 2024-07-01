@@ -25,10 +25,12 @@ function loadJS(url) {
   document.body.appendChild(script);
 }
 
-// Load CSS file
-loadCSS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-010724-v1.css');
+document.addEventListener('DOMContentLoaded', function() {
+  // Load CSS file
+  loadCSS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-010724-v1.css');
 
-// Load additional JavaScript files if any
-loadJS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-commonscripts.min.js');
+  // Load additional JavaScript files if any
+  loadJS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-commonscripts.min.js');
 
-console.log('cafe-cozy.js script executed'); // Logging
+  console.log('cafe-cozy.js script executed'); // Logging
+});
