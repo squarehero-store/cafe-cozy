@@ -1,0 +1,13 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore LESS files
+*.less
+
+# Ignore the replace-vars.js script
+replace-vars.js
+
+# Ignore other files or directories as needed
