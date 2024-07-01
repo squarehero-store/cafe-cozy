@@ -12,7 +12,7 @@ function loadJS(url) {
 }
 
 // Load CSS file
-loadCSS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy@latest/cafe-cozy-010724-v1.css');
+loadCSS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-010724-v1.css');
 
 // Load additional JavaScript files if any
-// loadJS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy@latest/another-file.js');
+loadJS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-commonscripts.min.js');
