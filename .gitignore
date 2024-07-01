@@ -8,6 +8,6 @@ node_modules/
 *.less
 
 # Ignore the replace-vars.js script
-replace-vars.js
+colour-vars.js
 
 # Ignore other files or directories as needed
