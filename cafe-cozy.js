@@ -1,44 +1,34 @@
-function loadCSS(url) {
-  console.log('Loading CSS:', url);
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = url;
-  link.onload = function() {
-    console.log('Loaded CSS:', url);
-    var applied = Array.from(document.styleSheets).some(sheet => sheet.href === url);
-    console.log('CSS applied:', applied);
-  };
-  link.onerror = function() {
-    console.error('Error loading CSS:', url);
-  };
-  document.head.appendChild(link);
-}
+/////// FOOTER COPYRIGHT ///////
+document.addEventListener('DOMContentLoaded', () => {
+    // Set the current year
+    document.querySelector('.current-year').textContent = new Date().getFullYear();
 
-function loadJS(url, callback) {
-  console.log('Loading JS:', url);
-  var script = document.createElement('script');
-  script.src = url;
-  script.async = true;
-  script.onload = function() {
-    console.log('Loaded JS:', url);
-    if (callback) callback();
-  };
-  script.onerror = function() {
-    console.error('Error loading JS:', url);
-  };
-  document.body.appendChild(script);
-}
+    // Fetch the website title
+    const siteJsonUrl = `${window.location.origin}/?format=json-pretty`;
 
-function initialize() {
-  loadCSS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-010724-v1.css');
-  loadJS('https://cdn.jsdelivr.net/gh/squarehero-store/cafe-cozy/cafe-cozy-commonscripts.min.js', function() {
-    console.log('Callback executed after JS load');
-  });
-  console.log('cafe-cozy.js script executed');
-}
+    fetch(siteJsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            const siteTitle = data.website.siteTitle;
+            document.querySelector('.site-title').textContent = siteTitle;
+        })
+        .catch(error => console.error('Error fetching site title:', error));
+});
 
-if (document.readyState === 'loading' || document.readyState === 'interactive') {
-  document.addEventListener('DOMContentLoaded', initialize);
-} else {
-  initialize();
-}
+/////// SECTION CLASSES ///////
+document.addEventListener("DOMContentLoaded", function() {
+    // Get all sections on the page
+    var sections = document.querySelectorAll(".page-section");
+
+    // Loop through each section
+    sections.forEach(function(section) {
+        // Check if the section contains a div with data-squarehero="section-name"
+        var savedDiv = section.querySelector('div[data-squarehero="section-name"]');
+        
+        // If a saved div is found, get the sh-section value and add it as a class to the section
+        if (savedDiv) {
+            var shSectionValue = savedDiv.getAttribute('sh-section');
+            section.classList.add(shSectionValue);
+        }
+    });
+});
