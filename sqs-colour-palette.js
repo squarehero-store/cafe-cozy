@@ -10,21 +10,24 @@ const templateName = 'cafe-cozy';
 // Function to get the latest versioned CSS file
 function getLatestVersionedCSSFile(directory, template) {
   const files = fs.readdirSync(directory);
-  const cssFiles = files.filter(file => file.match(new RegExp(`^${template}-\\d{6}-v\\d+\\.css$`)));
+  const cssFiles = files.filter(file => file.match(new RegExp(`^${template}-\\d+\\.\\d+\\.\\d+\\.css$`)));
 
   if (cssFiles.length === 0) {
     throw new Error('No versioned CSS files found.');
   }
 
-  // Sort files by date and version number
+  // Sort files by version number
   cssFiles.sort((a, b) => {
-    const [dateA, versionA] = a.match(/(\d{6})-v(\d+)/).slice(1, 3).map(Number);
-    const [dateB, versionB] = b.match(/(\d{6})-v(\d+)/).slice(1, 3).map(Number);
+    const [majorA, minorA, patchA] = a.match(/-(\d+)\.(\d+)\.(\d+)\.css$/).slice(1, 4).map(Number);
+    const [majorB, minorB, patchB] = b.match(/-(\d+)\.(\d+)\.(\d+)\.css$/).slice(1, 4).map(Number);
 
-    if (dateA !== dateB) {
-      return dateB - dateA; // Sort by date first
+    if (majorA !== majorB) {
+      return majorB - majorA; // Sort by major version first
     }
-    return versionB - versionA; // Then sort by version
+    if (minorA !== minorB) {
+      return minorB - minorA; // Then sort by minor version
+    }
+    return patchB - patchA; // Finally sort by patch version
   });
 
   return cssFiles[0];
