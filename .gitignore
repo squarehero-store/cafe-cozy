@@ -7,7 +7,10 @@ node_modules/
 # Ignore LESS files
 *.less
 
+# Ignore MD files
+*.md
+
 # Ignore the replace-vars.js script
-colour-vars.js
+sqs-colour-palette.js
 
 # Ignore other files or directories as needed
