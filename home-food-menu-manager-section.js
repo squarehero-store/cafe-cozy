@@ -1,6 +1,15 @@
-/////// FOOD & DRINK MENU MANAGER HOME PAGE ///////
+// Include PapaParse library if not already included in your HTML
+if (typeof Papa === 'undefined') {
+    console.error('PapaParse library not loaded. Please include it in your HTML file.');
+}
+
+// ======================================
+//   FOOD & DRINK MENU MANAGER HOME PAGE   
+// ======================================
+
+// 
 /* This script is designed for the food menu section on the home page. */
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     // Check if the food-menu meta tag is enabled
     const foodMenuMeta = document.querySelector('meta[name="food-menu"]');
     const isEnabled = foodMenuMeta ? foodMenuMeta.getAttribute('enabled') === 'true' : false;
@@ -28,10 +37,21 @@
             }
             const sheetUrl = metaTag.getAttribute('content');
 
+            // Check if PapaParse is available
+            if (typeof Papa === 'undefined') {
+                console.error('PapaParse library not loaded');
+                return;
+            }
+
             Papa.parse(sheetUrl, {
                 download: true,
                 header: true,
                 complete: function(results) {
+                    if (results.errors.length > 0) {
+                        console.error('Error parsing CSV:', results.errors);
+                        return;
+                    }
+
                     const rows = results.data;
                     const menuTabs = document.getElementById('menuTabs');
                     const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
