@@ -1,4 +1,3 @@
-// Ensure the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
     // Check if the food-menu meta tag is enabled
     const foodMenuMeta = document.querySelector('meta[name="food-menu"]');
@@ -9,10 +8,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Check if the foodMenuContainer exists
         if (foodMenuContainer) {
-            // Clear the container to avoid conflicts with existing content
+            console.log('Found foodMenuContainer:', foodMenuContainer);
+
+            // Clear only the intended container to avoid conflicts with existing content
             foodMenuContainer.innerHTML = '';
 
-            // Create the HTML structure
+            // Create the HTML structure within the foodMenuContainer
             const restaurantMenuDiv = document.createElement('div');
             restaurantMenuDiv.setAttribute('data-squarehero', 'restaurant-menu');
 
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;
             }
             const sheetUrl = metaTag.getAttribute('content');
+            console.log('Found Google Sheets URL:', sheetUrl);
 
             // Check if PapaParse is available
             if (typeof Papa === 'undefined') {
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     const rows = results.data;
                     const menuTabs = document.getElementById('menuTabs');
                     const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
+                    console.log('Unique menu types:', uniqueMenus);
 
                     // Create tabs for each unique menu type
                     uniqueMenus.forEach(menuType => {
