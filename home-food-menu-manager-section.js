@@ -1,33 +1,38 @@
-// Include PapaParse library if not already included in your HTML
-if (typeof Papa === 'undefined') {
-    console.error('PapaParse library not loaded. Please include it in your HTML file.');
-}
-
-// ======================================
-//   FOOD & DRINK MENU MANAGER HOME PAGE   
-// ======================================
-
-// 
-/* This script is designed for the food menu section on the home page. */
+// Ensure the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function() {
     // Check if the food-menu meta tag is enabled
     const foodMenuMeta = document.querySelector('meta[name="food-menu"]');
     const isEnabled = foodMenuMeta ? foodMenuMeta.getAttribute('enabled') === 'true' : false;
 
     if (isEnabled) {
-        const foodMenuContainer = document.getElementById('foodMenuContainer');
+        const foodMenuContainer = document.querySelector('#foodMenuContainer[data-squarehero="section-name"][sh-section="sh-menu-home"]');
 
         // Check if the foodMenuContainer exists
         if (foodMenuContainer) {
+            // Clear the container to avoid conflicts with existing content
+            foodMenuContainer.innerHTML = '';
+
             // Create the HTML structure
-            foodMenuContainer.innerHTML = `
-                <div data-squarehero="restaurant-menu">
-                    <div class="menu-tabs" id="menuTabs"></div>
-                    <div class="view-menu-button">
-                        <button onclick="window.location.href='/menu'">View Our Menu</button>
-                    </div>
-                </div>
-            `;
+            const restaurantMenuDiv = document.createElement('div');
+            restaurantMenuDiv.setAttribute('data-squarehero', 'restaurant-menu');
+
+            const menuTabsDiv = document.createElement('div');
+            menuTabsDiv.classList.add('menu-tabs');
+            menuTabsDiv.id = 'menuTabs';
+
+            const viewMenuButtonDiv = document.createElement('div');
+            viewMenuButtonDiv.classList.add('view-menu-button');
+
+            const viewMenuButton = document.createElement('button');
+            viewMenuButton.innerText = 'View Our Menu';
+            viewMenuButton.onclick = function() {
+                window.location.href = '/menu';
+            };
+
+            viewMenuButtonDiv.appendChild(viewMenuButton);
+            restaurantMenuDiv.appendChild(menuTabsDiv);
+            restaurantMenuDiv.appendChild(viewMenuButtonDiv);
+            foodMenuContainer.appendChild(restaurantMenuDiv);
 
             // Get the Google Sheets URL from the meta tag
             const metaTag = document.querySelector('meta[name="food-menu-sheet"]');
