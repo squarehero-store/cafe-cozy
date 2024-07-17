@@ -286,6 +286,14 @@ section[data-section-id="664c56233f19557f56c8bbb4"] .content-wrapper {
 #page #sections .gallery-section:first-child .gallery-fullscreen-slideshow .gallery-fullscreen-slideshow-item-img img {
   animation: zoomInOut 10s ease-in-out infinite;
 }
+.sh-menu .content-wrapper {
+  padding-top: 0!important;
+}
+@media only screen and (max-width: 750px) {
+  .sh-menu .content-wrapper {
+    padding-top: 30px!important;
+  }
+}
 .menu-page .sh-instagram-footer {
   display: none;
 }

@@ -11,6 +11,6 @@ node_modules/
 *.md
 
 # Ignore the replace-vars.js script
-sqs-colour-palette.js
+replace-variables.js
 
 # Ignore other files or directories as needed
