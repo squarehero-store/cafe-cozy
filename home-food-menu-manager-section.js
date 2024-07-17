@@ -1,6 +1,9 @@
+// ===============================================
+//   SquareHero Cafe Cozy Menu Plugin Home Section 
+// ===============================================
 document.addEventListener("DOMContentLoaded", function() {
     // Check if the food-menu meta tag is enabled
-    const foodMenuMeta = document.querySelector('meta[name="food-menu"]');
+    const foodMenuMeta = document.querySelector('meta[squarehero-plugin="food-menu"]');
     const isEnabled = foodMenuMeta ? foodMenuMeta.getAttribute('enabled') === 'true' : false;
 
     if (isEnabled) {
@@ -36,12 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
             foodMenuContainer.appendChild(restaurantMenuDiv);
 
             // Get the Google Sheets URL from the meta tag
-            const metaTag = document.querySelector('meta[name="food-menu-sheet"]');
-            if (!metaTag) {
-                console.error('Meta tag for Google Sheets URL not found');
+            const sheetUrl = foodMenuMeta.getAttribute('sheet-url');
+            if (!sheetUrl) {
+                console.error('Sheet URL not found in the meta tag');
                 return;
             }
-            const sheetUrl = metaTag.getAttribute('content');
             console.log('Found Google Sheets URL:', sheetUrl);
 
             // Check if PapaParse is available
