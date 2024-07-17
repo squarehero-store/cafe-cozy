@@ -7,34 +7,20 @@ const directoryPath = __dirname;
 // Template name
 const templateName = 'cafe-cozy';
 
-// Function to get the latest versioned CSS file
-function getLatestVersionedCSSFile(directory, template) {
+// Function to get the CSS file with the template name
+function getCSSFile(directory, template) {
   const files = fs.readdirSync(directory);
-  const cssFiles = files.filter(file => file.match(new RegExp(`^${template}-\\d+\\.\\d+\\.\\d+\\.css$`)));
+  const cssFile = files.find(file => file === `${template}.css`);
 
-  if (cssFiles.length === 0) {
-    throw new Error('No versioned CSS files found.');
+  if (!cssFile) {
+    throw new Error('CSS file not found.');
   }
 
-  // Sort files by version number
-  cssFiles.sort((a, b) => {
-    const [majorA, minorA, patchA] = a.match(/-(\d+)\.(\d+)\.(\d+)\.css$/).slice(1, 4).map(Number);
-    const [majorB, minorB, patchB] = b.match(/-(\d+)\.(\d+)\.(\d+)\.css$/).slice(1, 4).map(Number);
-
-    if (majorA !== majorB) {
-      return majorB - majorA; // Sort by major version first
-    }
-    if (minorA !== minorB) {
-      return minorB - minorA; // Then sort by minor version
-    }
-    return patchB - patchA; // Finally sort by patch version
-  });
-
-  return cssFiles[0];
+  return cssFile;
 }
 
-const latestCSSFile = getLatestVersionedCSSFile(directoryPath, templateName);
-const filePath = path.join(directoryPath, latestCSSFile);
+const cssFile = getCSSFile(directoryPath, templateName);
+const filePath = path.join(directoryPath, cssFile);
 
 fs.readFile(filePath, 'utf8', (err, data) => {
   if (err) {
@@ -53,6 +39,6 @@ fs.readFile(filePath, 'utf8', (err, data) => {
       console.error(err);
       return;
     }
-    console.log(`CSS variables have been replaced successfully in ${latestCSSFile}!`);
+    console.log(`CSS variables have been replaced successfully in ${cssFile}!`);
   });
 });
