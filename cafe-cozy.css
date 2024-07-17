@@ -189,7 +189,7 @@ h4 {
   font-size: 1.375rem!important;
   font-weight: 500;
   line-height: 115%;
-  color: hsla(var(--accent-hsl), 1);
+  color: #dd9833;
 }
 .sh-hero .image-block img {
   animation: zoomInOut 20s ease-in-out infinite;
@@ -203,7 +203,7 @@ h4 {
   display: flex;
   justify-content: center;
 }
-.sh-menu-home [data-squarehero="restaurant-menu"] .menu-links a {
+.sh-menu-home [data-squarehero="restaurant-menu"] .menu-links button {
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -211,11 +211,11 @@ h4 {
   text-decoration: underline;
   text-underline-offset: 0.2em;
 }
-.sh-menu-home [data-squarehero="restaurant-menu"] #menuPageButton {
+.sh-menu-home [data-squarehero="restaurant-menu"] .view-menu-button button {
   margin-top: 40px;
   padding: 1em 2.04em;
   border-radius: 100px;
-  background: hsla(var(--accent-hsl), 1);
+  background: #dd9833;
   font-weight: 500;
   color: white;
   border: none;
@@ -325,7 +325,7 @@ section[data-section-id="664c56233f19557f56c8bbb4"] .content-wrapper {
   margin-bottom: 10px;
   margin-top: 0;
   font-size: 1.3rem;
-  color: hsla(var(--black-hsl), 1);
+  color: #353C2E;
   font-style: normal;
   font-weight: 700;
   line-height: 120%;
@@ -399,9 +399,9 @@ section[data-section-id="664c56233f19557f56c8bbb4"] .content-wrapper {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: normal;
-  border: solid 2px hsla(var(--darkAccent-hsl), 1);
+  border: solid 2px #616E30;
   border-radius: 100px;
-  color: hsla(var(--darkAccent-hsl), 1);
+  color: #616E30;
   text-decoration: none;
   background: none;
   margin-right: 10px;
@@ -415,7 +415,7 @@ section[data-section-id="664c56233f19557f56c8bbb4"] .content-wrapper {
 }
 .sh-menu .menu-tabs button.active {
   color: white;
-  background: hsla(var(--darkAccent-hsl), 1);
+  background: #616E30;
   font-weight: 500;
 }
 @keyframes fadeIn {
@@ -480,7 +480,7 @@ section[data-section-id="664c56233f19557f56c8bbb4"] .content-wrapper {
 .collection-type-blog-basic-grid.view-item article h2,
 .collection-type-blog-basic-grid.view-item article h3,
 .collection-type-blog-basic-grid.view-item article h4 {
-  color: hsla(var(--darkAccent-hsl), 1);
+  color: #616E30;
   margin-bottom: 0;
 }
 .collection-type-blog-basic-grid.view-item .sh-instagram-footer {

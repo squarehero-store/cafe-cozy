@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
             restaurantMenuDiv.setAttribute('data-squarehero', 'restaurant-menu');
 
             const menuTabsDiv = document.createElement('div');
-            menuTabsDiv.classList.add('menu-tabs');
+            menuTabsDiv.classList.add('menu-links');
             menuTabsDiv.id = 'menuTabs';
 
             const viewMenuButtonDiv = document.createElement('div');
