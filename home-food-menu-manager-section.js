@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             const menuTabsDiv = document.createElement('div');
             menuTabsDiv.classList.add('menu-links');
-            menuTabsDiv.id = 'menuTabs';
+            menuTabsDiv.id = 'menuLinks'; // Ensure id is set to 'menuLinks'
 
             const viewMenuButtonDiv = document.createElement('div');
             viewMenuButtonDiv.classList.add('view-menu-button');
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
 
                     const rows = results.data;
-                    const menuTabs = document.getElementById('menuTabs');
+                    const menuTabs = document.getElementById('menuLinks'); // Use 'menuLinks' as id
                     const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
                     console.log('Unique menu types:', uniqueMenus);
 
