@@ -1,6 +1,6 @@
 
 // ============================================
-//   SquareHero Cafe Cozy Template Files v0.1.0   
+//   SquareHero Cafe Cozy Template Files v0.2.6   
 // ============================================
 
 /////// LOCATIONS DROPDOWN LIST ///////
