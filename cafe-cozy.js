@@ -1,9 +1,8 @@
 
 // ============================================
-//   SquareHero Cafe Cozy Template Files v0.2.6   
+//   SquareHero Cafe Cozy Template Files v0.2.7   
 // ============================================
 
-window.addEventListener('load', function () {
   function createFolderItems(container, items, isMobile = false) {
       items.forEach(item => {
           const folderItemDiv = document.createElement('div');
@@ -119,7 +118,7 @@ window.addEventListener('load', function () {
           console.log("Script executed successfully");
       }
   }
-});
+
 
 // ==================================
 //   Common SquareHero Template Files   
@@ -127,7 +126,6 @@ window.addEventListener('load', function () {
 
 
 /////// FOOTER COPYRIGHT ///////
-document.addEventListener('DOMContentLoaded', () => {
     // Set the current year
     document.querySelector('.current-year').textContent = new Date().getFullYear();
 
@@ -141,10 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.site-title').textContent = siteTitle;
         })
         .catch(error => console.error('Error fetching site title:', error));
-});
 
 /////// SECTION CLASSES ///////
-document.addEventListener("DOMContentLoaded", function() {
     // Get all sections on the page
     var sections = document.querySelectorAll(".page-section");
 
@@ -159,4 +155,3 @@ document.addEventListener("DOMContentLoaded", function() {
             section.classList.add(shSectionValue);
         }
     });
-});
