@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
             viewMenuButtonDiv.classList.add('view-menu-button');
 
             const viewMenuButton = document.createElement('button');
+            viewMenuButton.classList.add('sh-button');
             viewMenuButton.innerText = 'View Our Menu';
             viewMenuButton.onclick = function() {
                 window.location.href = '/menu';
