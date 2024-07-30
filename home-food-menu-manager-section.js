@@ -1,7 +1,7 @@
 // ===============================================
 //   SquareHero Cafe Cozy Menu Plugin Home Section 
 // ===============================================
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Check if the food-menu meta tag is enabled
     const foodMenuMeta = document.querySelector('meta[squarehero-plugin="food-menu"]');
     const isEnabled = foodMenuMeta ? foodMenuMeta.getAttribute('enabled') === 'true' : false;
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const viewMenuButton = document.createElement('button');
             viewMenuButton.classList.add('sh-button');
             viewMenuButton.innerText = 'View Our Menu';
-            viewMenuButton.onclick = function() {
+            viewMenuButton.onclick = function () {
                 window.location.href = '/menu';
             };
 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
             Papa.parse(sheetUrl, {
                 download: true,
                 header: true,
-                complete: function(results) {
+                complete: function (results) {
                     if (results.errors.length > 0) {
                         console.error('Error parsing CSV:', results.errors);
                         return;
@@ -67,20 +67,27 @@ document.addEventListener("DOMContentLoaded", function() {
                     const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
                     console.log('Unique menu types:', uniqueMenus);
 
-                   // Create tabs for each unique menu type
-uniqueMenus.forEach(menuType => {
-    const tabButton = document.createElement('button');
-    tabButton.textContent = menuType;
-    tabButton.classList.add('sh-button'); // Add the 'sh-button' class
-    tabButton.onclick = function() {
-        // Encode the menu type to handle spaces or special characters
-        const encodedMenuType = encodeURIComponent(menuType.toLowerCase());
-        window.location.href = `/menu?menu=${encodedMenuType}`;
-    };
-    menuTabs.appendChild(tabButton);
-});
+                    // Create tabs for each unique menu type
+                    uniqueMenus.forEach(menuType => {
+                        const tabButton = document.createElement('button');
+                        tabButton.textContent = menuType;
+                        // Remove the line that adds the 'sh-button' class
+                        tabButton.onclick = function (event) {
+                            event.preventDefault(); // Prevent any default behavior
+
+                            // Encode the menu type to handle spaces or special characters
+                            const encodedMenuType = encodeURIComponent(menuType.toLowerCase());
+                            const url = `/menu?menu=${encodedMenuType}`;
+
+                            console.log('Generated URL:', url); // Log the URL for debugging
+
+                            // Use window.location.assign instead of window.location.href
+                            window.location.assign(url);
+                        };
+                        menuTabs.appendChild(tabButton);
+                    });
                 },
-                error: function(error, file) {
+                error: function (error, file) {
                     console.error('Error parsing CSV:', error, file);
                 }
             });
