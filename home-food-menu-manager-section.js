@@ -1,7 +1,7 @@
 // ===============================================
 //   SquareHero Cafe Cozy Menu Plugin Home Section 
 // ===============================================
-document.addEventListener("DOMContentLoaded", function () {
+function initSquareHeroMenuPlugin() {
     // Check if the food-menu meta tag is enabled
     const foodMenuMeta = document.querySelector('meta[squarehero-plugin="food-menu"]');
     const isEnabled = foodMenuMeta ? foodMenuMeta.getAttribute('enabled') === 'true' : false;
@@ -71,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     uniqueMenus.forEach(menuType => {
                         const tabButton = document.createElement('button');
                         tabButton.textContent = menuType;
-                        // Remove the line that adds the 'sh-button' class
                         tabButton.onclick = function (event) {
                             event.preventDefault(); // Prevent any default behavior
 
@@ -97,4 +96,11 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.log("Food menu is not enabled");
     }
-});
+}
+
+// Call the function when the script is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSquareHeroMenuPlugin);
+} else {
+    initSquareHeroMenuPlugin();
+}
