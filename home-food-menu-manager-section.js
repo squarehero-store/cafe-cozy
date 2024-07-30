@@ -67,15 +67,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
                     console.log('Unique menu types:', uniqueMenus);
 
-                    // Create tabs for each unique menu type
-                    uniqueMenus.forEach(menuType => {
-                        const tabButton = document.createElement('button');
-                        tabButton.textContent = menuType;
-                        tabButton.onclick = function() {
-                            window.location.href = '/menu';
-                        };
-                        menuTabs.appendChild(tabButton);
-                    });
+                   // Create tabs for each unique menu type
+uniqueMenus.forEach(menuType => {
+    const tabButton = document.createElement('button');
+    tabButton.textContent = menuType;
+    tabButton.classList.add('sh-button'); // Add the 'sh-button' class
+    tabButton.onclick = function() {
+        // Encode the menu type to handle spaces or special characters
+        const encodedMenuType = encodeURIComponent(menuType.toLowerCase());
+        window.location.href = `/menu?menu=${encodedMenuType}`;
+    };
+    menuTabs.appendChild(tabButton);
+});
                 },
                 error: function(error, file) {
                     console.error('Error parsing CSV:', error, file);
