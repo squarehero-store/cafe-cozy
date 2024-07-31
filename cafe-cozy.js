@@ -2,7 +2,7 @@
 // =========================================
 //   SquareHero Cafe Cozy Template Files 
 // =========================================
-
+(function() {
   function createFolderItems(container, items, isMobile = false) {
       items.forEach(item => {
           const folderItemDiv = document.createElement('div');
@@ -155,3 +155,62 @@
             section.classList.add(shSectionValue);
         }
     });
+
+/////// AUTOMATIC MOBILE HAMBURGER SCRIPT ///////
+
+function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      }
+      
+      function checkHeaderNavWrap() {
+        const headerNavWrapper = document.querySelector('.header-nav-wrapper');
+        const headerNavList = document.querySelector('.header-nav-list');
+        const body = document.body;
+      
+        if (headerNavWrapper && headerNavList) {
+          // Temporarily remove the class to get accurate measurements
+          const hadClass = body.classList.contains('release-the-burger');
+          body.classList.remove('release-the-burger');
+      
+          // Delay measurement to allow layout to update
+          setTimeout(() => {
+            const wrapperWidth = headerNavWrapper.offsetWidth;
+            const navItems = headerNavList.children;
+            let totalChildrenWidth = 0;
+      
+            for (let item of navItems) {
+              const style = window.getComputedStyle(item);
+              const marginLeft = parseFloat(style.marginLeft);
+              const marginRight = parseFloat(style.marginRight);
+              totalChildrenWidth += item.offsetWidth + marginLeft + marginRight;
+            }
+      
+            if (totalChildrenWidth > wrapperWidth) {
+              body.classList.add('release-the-burger');
+            } else if (hadClass) {
+              // Double-check if we still need the class
+              if (totalChildrenWidth <= wrapperWidth) {
+                body.classList.remove('release-the-burger');
+              } else {
+                body.classList.add('release-the-burger');
+              }
+            }
+          }, 0);
+        }
+      }
+      
+      const debouncedCheck = debounce(checkHeaderNavWrap, 250);
+      
+      // Check on load
+      window.addEventListener('load', checkHeaderNavWrap);
+      
+      // Check on resize, using the debounced function
+      window.addEventListener('resize', debouncedCheck);
+      
+      // Initial check
+      checkHeaderNavWrap();
+    })();
