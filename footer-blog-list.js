@@ -1,7 +1,7 @@
-// blog-list.js
-
 (function() {
-  document.addEventListener('DOMContentLoaded', function() {
+// ===============================================
+//   SquareHero Cafe Cozy: Footer Blog List 
+// ===============================================
     // Find the container div
     var container = document.querySelector('[data-squarehero="blog-list"]');
     
@@ -52,5 +52,4 @@
         container.appendChild(viewAllLink);
       })
       .catch(error => console.error('Error fetching blog data:', error));
-  });
 })();
