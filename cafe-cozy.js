@@ -126,19 +126,16 @@
 
 
 /////// FOOTER COPYRIGHT ///////
-    // Set the current year
-    document.querySelector('.current-year').textContent = new Date().getFullYear();
+   // Fetch the website title
+const siteJsonUrl = `${window.location.origin}/?format=json-pretty`;
 
-    // Fetch the website title
-    const siteJsonUrl = `${window.location.origin}/?format=json-pretty`;
-
-    fetch(siteJsonUrl)
-        .then(response => response.json())
-        .then(data => {
-            const siteTitle = data.website.siteTitle;
-            document.querySelector('.site-title').textContent = siteTitle;
-        })
-        .catch(error => console.error('Error fetching site title:', error));
+fetch(siteJsonUrl)
+    .then(response => response.json())
+    .then(data => {
+        const siteTitle = data.website.siteTitle;
+        document.querySelector('.site-title').textContent = siteTitle;
+    })
+    .catch(error => console.error('Error fetching site title:', error));
 
 /////// SECTION CLASSES ///////
     // Get all sections on the page
