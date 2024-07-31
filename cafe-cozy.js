@@ -1,7 +1,7 @@
 
-// ============================================
-//   SquareHero Cafe Cozy Template Files v0.2.7   
-// ============================================
+// =========================================
+//   SquareHero Cafe Cozy Template Files 
+// =========================================
 
   function createFolderItems(container, items, isMobile = false) {
       items.forEach(item => {
