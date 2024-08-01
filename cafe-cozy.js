@@ -120,6 +120,31 @@
         console.error("Error in collection folder functionality:", error);
     }
 
+    (function() {
+        function addSvgToFolderTitles() {
+            const folderTitles = document.querySelectorAll('.header-nav-folder-title');
+            const svgString = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 8" class="folder-title-arrow">
+                    <path fill="#000000" d="M5.581 7.432a.644.644 0 0 0 .902 0l5.332-5.305c.247-.273.247-.684 0-.93l-.628-.629c-.247-.246-.657-.246-.93 0L6.046 4.78 1.808.57c-.274-.247-.684-.247-.93 0l-.629.628c-.246.246-.246.657 0 .93l5.332 5.305Z"/>
+                </svg>
+            `;
+    
+            folderTitles.forEach(title => {
+                const svgContainer = document.createElement('span');
+                svgContainer.classList.add('folder-title-arrow-container');
+                svgContainer.innerHTML = svgString;
+                title.appendChild(svgContainer);
+            });
+        }
+    
+        // Run the function when the DOM is fully loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addSvgToFolderTitles);
+        } else {
+            addSvgToFolderTitles();
+        }
+    })();
+
     // Footer copyright functionality
     try {
         const siteJsonUrl = `${window.location.origin}/?format=json-pretty`;
