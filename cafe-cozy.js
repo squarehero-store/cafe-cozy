@@ -242,19 +242,36 @@
     function checkLicense() {
         const currentUrl = window.location.href;
         const jsonUrl = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'format=json';
+        
+        // Log the constructed JSON URL
+        console.log('Attempting to fetch JSON from:', jsonUrl);
+
         fetch(jsonUrl)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
+                return response.text();
             })
-            .then(data => {
-                const websiteId = data.website.id;
+            .then(text => {
+                let data;
+                try {
+                    data = JSON.parse(text);
+                } catch (error) {
+                    console.error('Error parsing JSON:', error);
+                    console.log('Response text:', text.substring(0, 200) + '...'); // Log the first 200 characters of the response
+                    return;
+                }
+
+                const websiteId = data.website && data.website.id;
                 
                 if (!websiteId) {
-                    throw new Error("No website ID found");
+                    console.error("No website ID found");
+                    return;
                 }
+
+                console.log('Website ID:', websiteId); // Log the website ID
+
                 const cacheBuster = new Date().getTime();
                 const csvUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTABxXoUTzl1KE_-WuvseavQ0W18hmEB7ZxWjslopNgxGbQBfFT6Pq4FEZG5bFCH6ODowjwOrd12TgE/pub?output=csv&cacheBuster=${cacheBuster}`;
                 
@@ -270,7 +287,6 @@
                     });
             })
             .catch(error => {
-                // Handle errors silently
             });
     }
 
