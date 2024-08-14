@@ -238,4 +238,56 @@
     } catch (error) {
         console.error("Error in mobile hamburger script:", error);
     }
+    // License checking functionality
+    function checkLicense() {
+        const currentUrl = window.location.href;
+        const jsonUrl = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'format=json';
+        fetch(jsonUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const websiteId = data.website.id;
+                
+                if (!websiteId) {
+                    throw new Error("No website ID found");
+                }
+                const cacheBuster = new Date().getTime();
+                const csvUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTABxXoUTzl1KE_-WuvseavQ0W18hmEB7ZxWjslopNgxGbQBfFT6Pq4FEZG5bFCH6ODowjwOrd12TgE/pub?output=csv&cacheBuster=${cacheBuster}`;
+                
+                return fetch(csvUrl)
+                    .then(response => response.text())
+                    .then(csv => {
+                        const rows = csv.split('\n');
+                        const ids = rows.slice(1).map(row => row.split(',')[0].trim());
+                        
+                        if (!ids.includes(websiteId)) {
+                            logUnlicensedTemplate(websiteId, currentUrl);
+                        }
+                    });
+            })
+            .catch(error => {
+                // Handle errors silently
+            });
+    }
+
+    function logUnlicensedTemplate(websiteId, pageUrl) {
+        const appsScriptUrl = 'https://script.google.com/macros/s/AKfycby7PQo4fqQM3QeOexCENdwv-Fm65As4vuWMozigAVh3q9ceL-h7CzdKY9dM11AHD3jKRg/exec';
+        
+        const params = new URLSearchParams({
+            websiteId: websiteId,
+            pageUrl: pageUrl
+        });
+        fetch(`${appsScriptUrl}?${params.toString()}`)
+            .then(response => response.text())
+            .catch(error => {
+                // Handle errors silently
+            });
+    }
+
+    // Run license check when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', checkLicense);
 })();
