@@ -260,7 +260,7 @@
                 } catch (error) {
                     console.error('Error parsing JSON:', error);
                     console.log('Response text:', text.substring(0, 200) + '...'); // Log the first 200 characters of the response
-                    return;
+                    throw error; // Re-throw the error to be caught in the main catch block
                 }
 
                 const websiteId = data.website && data.website.id;
@@ -287,6 +287,7 @@
                     });
             })
             .catch(error => {
+                console.error('Error in license check:', error);
             });
     }
 
@@ -300,7 +301,7 @@
         fetch(`${appsScriptUrl}?${params.toString()}`)
             .then(response => response.text())
             .catch(error => {
-                // Handle errors silently
+                console.error('Error logging unlicensed template:', error);
             });
     }
 
