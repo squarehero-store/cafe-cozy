@@ -394,7 +394,6 @@ body.primary-button-shape-oval .blog-more-link,
 }
 #siteWrapper .sh-footer .newsletter-form .newsletter-form-header-title {
   font-size: 1.375rem!important;
-  font-weight: 500;
   line-height: 115%;
   color: hsla(var(--accent-hsl), 1);
 }
