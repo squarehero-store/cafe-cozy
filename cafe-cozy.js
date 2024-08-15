@@ -1,9 +1,7 @@
-
 // =========================================
 //   SquareHero Cafe Cozy Template Files 
 // =========================================
 (function() {
-    console.log('SquareHero Cafe Cozy Template script started');
     function createFolderItems(container, items, isMobile = false) {
         items.forEach(item => {
             const folderItemDiv = document.createElement('div');
@@ -241,58 +239,41 @@
     }
     // License checking functionality
     function checkLicense() {
-        console.log('checkLicense function called');
         const currentUrl = window.location.href;
         const jsonUrl = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'format=json';
-        
-        console.log('Current URL:', currentUrl);
-        console.log('Attempting to fetch JSON from:', jsonUrl);
 
         fetch(jsonUrl)
             .then(response => {
-                console.log('Fetch response received');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 return response.text();
             })
             .then(text => {
-                console.log('Response text received, attempting to parse JSON');
                 let data;
                 try {
                     data = JSON.parse(text);
-                    console.log('JSON parsed successfully');
                 } catch (error) {
-                    console.error('Error parsing JSON:', error);
-                    console.log('Response text:', text.substring(0, 200) + '...');
                     throw error;
                 }
 
                 const websiteId = data.website && data.website.id;
                 
                 if (!websiteId) {
-                    console.error("No website ID found");
                     return;
                 }
-
-                console.log('Website ID:', websiteId);
 
                 const cacheBuster = new Date().getTime();
                 const csvUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTABxXoUTzl1KE_-WuvseavQ0W18hmEB7ZxWjslopNgxGbQBfFT6Pq4FEZG5bFCH6ODowjwOrd12TgE/pub?output=csv&cacheBuster=${cacheBuster}`;
                 
-                console.log('Fetching CSV from:', csvUrl);
                 return fetch(csvUrl)
                     .then(response => response.text())
                     .then(csv => {
-                        console.log('CSV fetched successfully');
                         const rows = csv.split('\n');
                         const ids = rows.slice(1).map(row => row.split(',')[0].trim());
                         
                         if (!ids.includes(websiteId)) {
-                            console.log('Unlicensed template detected, logging...');
                             logUnlicensedTemplate(websiteId, currentUrl);
-                        } else {
-                            console.log('Licensed template confirmed');
                         }
                     });
             })
@@ -302,7 +283,6 @@
     }
 
     function logUnlicensedTemplate(websiteId, pageUrl) {
-        console.log('Logging unlicensed template');
         const appsScriptUrl = 'https://script.google.com/macros/s/AKfycby7PQo4fqQM3QeOexCENdwv-Fm65As4vuWMozigAVh3q9ceL-h7CzdKY9dM11AHD3jKRg/exec';
         
         const params = new URLSearchParams({
@@ -310,16 +290,13 @@
             pageUrl: pageUrl
         });
         fetch(`${appsScriptUrl}?${params.toString()}`)
-            .then(response => response.text())
-            .then(() => console.log('Unlicensed template logged successfully'))
             .catch(error => {
                 console.error('Error logging unlicensed template:', error);
             });
     }
 
     // Run license check when DOM is fully loaded
-    console.log('Adding DOMContentLoaded event listener for license check');
     document.addEventListener('DOMContentLoaded', checkLicense);
 
-    console.log('SquareHero Cafe Cozy Template script completed');
+    console.log('Cafe Cozy template by SquareHero.store script completed');
 })();
