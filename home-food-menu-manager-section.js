@@ -64,7 +64,7 @@ function initSquareHeroMenuPlugin() {
 
                     const rows = results.data;
                     const menuTabs = document.getElementById('menuLinks'); // Use 'menuLinks' as id
-                    const uniqueMenus = [...new Set(rows.map(row => row.Menu))]; // Get unique menu types
+                    const uniqueMenus = [...new Set(rows.map(row => row.Menu))].filter(menu => menu && menu.trim() !== ''); // Filter out empty or whitespace-only menu types
                     console.log('Unique menu types:', uniqueMenus);
 
                     // Create tabs for each unique menu type
