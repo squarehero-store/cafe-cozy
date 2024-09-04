@@ -239,14 +239,9 @@
     }
     ///// License checking functionality ////
     function checkLicense() {
-        // Check if we're in edit mode (backend)
-        if (!document.body.classList.contains('sqs-edit-mode')) {
-            return; // Exit if not in edit mode
-        }
-    
         const currentUrl = window.location.href;
         const jsonUrl = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'format=json';
-    
+
         fetch(jsonUrl)
             .then(response => {
                 if (!response.ok) {
@@ -261,13 +256,13 @@
                 } catch (error) {
                     throw error;
                 }
-    
+
                 const websiteId = data.website && data.website.id;
                 
                 if (!websiteId) {
                     return;
                 }
-    
+
                 const cacheBuster = new Date().getTime();
                 const csvUrl = `https://docs.google.com/spreadsheets/d/e/2PACX-1vTABxXoUTzl1KE_-WuvseavQ0W18hmEB7ZxWjslopNgxGbQBfFT6Pq4FEZG5bFCH6ODowjwOrd12TgE/pub?output=csv&cacheBuster=${cacheBuster}`;
                 
@@ -286,7 +281,7 @@
                 console.error('Error in license check:', error);
             });
     }
-    
+
     function logUnlicensedTemplate(websiteId, pageUrl) {
         const appsScriptUrl = 'https://script.google.com/macros/s/AKfycby7PQo4fqQM3QeOexCENdwv-Fm65As4vuWMozigAVh3q9ceL-h7CzdKY9dM11AHD3jKRg/exec';
         
@@ -299,13 +294,9 @@
                 console.error('Error logging unlicensed template:', error);
             });
     }
-    
-    // Run license check when DOM is fully loaded, but only if in edit mode
-    document.addEventListener('DOMContentLoaded', () => {
-        if (document.body.classList.contains('sqs-edit-mode')) {
-            checkLicense();
-        }
-    });
+
+    // Run license check when DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', checkLicense);
 
     // Integrated Back to Top Plugin with 60-minute cache buster
     (function(){
