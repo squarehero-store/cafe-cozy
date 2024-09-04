@@ -299,4 +299,24 @@
     document.addEventListener('DOMContentLoaded', checkLicense);
 
     console.log('Cafe Cozy template by SquareHero.store script completed');
+    // Integrated Back to Top Plugin with 60-minute cache buster
+    (function(){
+        function getCacheBuster() {
+            const now = new Date();
+            const hours = now.getUTCHours();
+            const minutes = now.getUTCMinutes();
+            return `${hours}.${Math.floor(minutes / 60)}`;
+        }
+
+        const cacheBuster = getCacheBuster();
+
+        const script = document.createElement('script');
+        script.src = `https://cdn.jsdelivr.net/gh/squarehero-store/back-to-top@1/back-to-top.min.js?v=${cacheBuster}`;
+        document.head.appendChild(script);
+
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = `https://cdn.jsdelivr.net/gh/squarehero-store/back-to-top@1/back-to-top.min.css?v=${cacheBuster}`;
+        document.head.appendChild(link);
+    })();
 })();
