@@ -244,12 +244,6 @@
             return; // Exit if not in edit mode
         }
     
-        // Check if license has already been verified this session
-        if (sessionStorage.getItem('squareheroLicenseVerified') === 'true') {
-            console.log('License already verified this session.');
-            return;
-        }
-    
         const currentUrl = window.location.href;
         const jsonUrl = currentUrl + (currentUrl.includes('?') ? '&' : '?') + 'format=json';
     
@@ -283,13 +277,8 @@
                         const rows = csv.split('\n');
                         const ids = rows.slice(1).map(row => row.split(',')[0].trim());
                         
-                        if (ids.includes(websiteId)) {
-                            // License is valid
-                            sessionStorage.setItem('squareheroLicenseVerified', 'true');
-                        } else {
-                            // License is invalid
+                        if (!ids.includes(websiteId)) {
                             logUnlicensedTemplate(websiteId, currentUrl);
-                            sessionStorage.setItem('squareheroLicenseVerified', 'false');
                         }
                     });
             })
