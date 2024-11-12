@@ -81,6 +81,9 @@ h4 {
   font-size: var(--tertiary-button-font-font-size-value) !important;
   color: hsla(var(--white-hsl), 1);
 }
+.sqs-block-button-element {
+  color: hsla(var(--white-hsl), 1) !important;
+}
 .sqs-button-element--tertiary {
   min-width: 50%!important;
 }
