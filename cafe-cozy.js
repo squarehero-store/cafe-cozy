@@ -318,4 +318,6 @@
         link.href = `https://cdn.jsdelivr.net/gh/squarehero-store/back-to-top@1/back-to-top.min.css?v=${cacheBuster}`;
         document.head.appendChild(link);
     })();
+// Log successful script execution
+console.log("Café Cozy by SquareHero.store / Learn more at %chttps://www.squarehero.store", "color: blue; text-decoration: underline; cursor: pointer;");
 })();
