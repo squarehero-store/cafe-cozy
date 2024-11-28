@@ -79,7 +79,7 @@ h4 {
 .blog-more-link {
   padding: var(--tertiary-button-padding-y) var(--tertiary-button-padding-x) !important;
   font-size: var(--tertiary-button-font-font-size-value) !important;
-  color: hsla(var(--white-hsl), 1) !important;
+  color: hsla(var(--white-hsl), 1);
 }
 .sqs-block-button-element,
 .newsletter-form-button-label {
